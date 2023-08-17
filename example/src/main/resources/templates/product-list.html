@@ -1,0 +1,52 @@
+<?use w:org.teavm.flavour.widgets?>
+<nav class="navbar navbar-static-top">
+  <div class="container-fluid">
+    <div class="collapse navbar-collapse">
+      <button type="button" class="btn btn-default navbar-btn" event:click="add()" aria-label="Add">
+        <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+      </button>
+      <button type="button" class="btn btn-default navbar-btn" event:click="cursor.refresh()"
+              html:enabled="not cursor.loading">
+        <span class="glyphicon glyphicon-refresh" aria-hidden="true"></span>
+      </button>
+      <form class="navbar-form navbar-right">
+        <div class="form-group">
+          <input placeholder="Search..." type="text" class="form-control" html:change="filter"/>
+        </div>
+      </form>
+    </div>
+  </div>
+</nav>
+
+<div class="container-fluid">
+  <nav>
+    <w:paginator data="cursor" page-link="(num, c) -> pageLink(num, c)"/>
+  </nav>
+  <div>
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th></th>
+          <th>SKU</th>
+          <th>Name</th>
+          <th>Price</th>
+        </tr>
+      </thead>
+      <tbody>
+        <std:foreach var="product" index="i" in="cursor">
+          <tr>
+            <td><a html:link="edit(product.id, it)">Edit</a></td>
+            <td><html:text value="product.sku"/></td>
+            <td><html:text value="product.name"/></td>
+            <td align="right"><html:text value="'$' + product.unitPrice"/></td>
+          </tr>
+        </std:foreach>
+        <std:if condition="cursor.empty">
+          <tr>
+            <td colspan="5"><i>There are no products satisfying given criteria</i></td>
+          </tr>
+        </std:if>
+      </tbody>
+    </table>
+  </div>
+</div>

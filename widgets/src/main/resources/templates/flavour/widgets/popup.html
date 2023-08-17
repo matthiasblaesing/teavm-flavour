@@ -1,0 +1,16 @@
+<?use w:org.teavm.flavour.widgets?>
+<div class="modal fade in" tabindex="-1" style="display:block">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close" event:click="close()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        &nbsp;
+      </div>
+      <div class="modal-body">
+        <std:insert fragment="content"/>
+      </div>
+    </div>
+  </div>
+</div>

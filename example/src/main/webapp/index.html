@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+    <title>TeaVM Flavour example application</title>
+    <script type="text/javascript" charset="UTF-8" src="teavm/classes.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="css/bootstrap-theme.min.css">
+    <link rel="stylesheet" type="text/css" href="flavour/widgets.css">
+    <link rel="stylesheet" type="text/css" href="css/app.css">
+  </head>
+  <body onload="main()">
+    <div class="connection-failure-indicator">
+      Error sending request to the server
+      <button type="button" class="close" onclick="body.className = '';">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div id="application-content"></div>
+  </body>
+</html>

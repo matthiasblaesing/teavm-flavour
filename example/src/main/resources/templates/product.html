@@ -1,0 +1,49 @@
+<?use v:org.teavm.flavour.validation?>
+<?import org.teavm.flavour.validation.Converter?>
+<v:validator as="validator">
+  <v:validation of="product.sku" as="skuField" convert="Converter.stringFormat()">
+    <v:check rule="not it.empty" as="skuNotEmpty"/>
+  </v:validation>
+  <v:validation of="product.name" as="nameField" convert="Converter.stringFormat()">
+    <v:check rule="not it.empty" as="nameNotEmpty"/>
+  </v:validation>
+  <v:validation of="product.unitPrice" as="priceField" convert="Converter.doubleFormat('#,##0.00')">
+    <v:check rule="it != null" as="priceNotEmpty"/>
+    <v:check rule="it > 0" as="pricePositive"/>
+  </v:validation>
+  <div class="container-fluid">
+    <div>
+      <form>
+        <div class="form-group" attr:class="skuField.valid ? 'form-group' : 'form-group has-error'">
+          <label>SKU</label>
+          <input type="text" class="form-control" v:bind="skuField"/>
+          <std:if condition="not skuNotEmpty">
+            <span class="help-block">SKU is required</span>
+          </std:if>
+        </div>
+        <div class="form-group" attr:class="nameField.valid ? 'form-group' : 'form-group has-error'">
+          <label>Name</label>
+          <input type="text" class="form-control" v:bind="nameField"/>
+          <std:if condition="not nameNotEmpty">
+            <span class="help-block">Name is required</span>
+          </std:if>
+        </div>
+        <div attr:class="priceField.valid ? 'form-group' : 'form-group has-error'">
+          <label>Price</label>
+          <input type="text" class="form-control" v:bind="priceField"/>
+          <std:if condition="not priceNotEmpty">
+            <span class="help-block">Price is required.</span>
+          </std:if>
+          <std:if condition="not priceField.validFormat">
+            <span class="help-block">Unexpected characters.</span>
+          </std:if>
+          <std:if condition="not pricePositive">
+            <span class="help-block">Price must be positive.</span>
+          </std:if>
+        </div>
+        <button type="button" class="btn btn-primary" event:click="validator.submit(() -> save())"
+            html:enabled="validator.valid">Save</button>
+      </form>
+    </div>
+  </div>
+</v:validator>
