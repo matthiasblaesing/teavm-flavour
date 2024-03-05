@@ -61,10 +61,11 @@ public class PathRoutingStrategy implements RoutingStrategy<Event> {
     }
 
     private String trim(String path) {
-        if (path.startsWith("/")) {
-            return path.substring(1);
-        }
-        else return path;
+      if (path.startsWith("/")) {
+        return path.substring(1);
+      } else {
+        return path;
+      }
     }
 
     @Override

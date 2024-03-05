@@ -14,17 +14,17 @@
     limitations under the License.
 -->
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
-  <groupId>org.teavm.flavour</groupId>
+  <groupId>com.frequal.flavour</groupId>
   <artifactId>teavm-flavour</artifactId>
   <version>0.3.0-SNAPSHOT</version>
   <packaging>pom</packaging>
 
   <name>TeaVM Flavour - Parent</name>
-  <description>TeaVM Flavour is a web framework for TeaVM</description>
-  <url>http://teavm.org</url>
+  <description>Flavour is a lightweight, fast framework for making modern web apps using Java</description>
+  <url>https://flavour.sourceforge.io/</url>
 
   <licenses>
     <license>
@@ -37,42 +37,25 @@
 
   <developers>
     <developer>
-      <id>konsoletyper</id>
-      <name>Alexey Andreev</name>
-      <email>konsoletyper@gmail.com</email>
-      <timezone>+4</timezone>
+      <id>scram-team</id>
+      <name>ScraM Team</name>
+      <email>scramdevs@gmail.com</email>
     </developer>
   </developers>
 
-  <repositories>
-    <repository>
-      <id>teavm-dev</id>
-      <url>https://dl.bintray.com/konsoletyper/teavm</url>
-    </repository>
-  </repositories>
-
-  <pluginRepositories>
-    <pluginRepository>
-      <id>teavm-dev</id>
-      <url>https://dl.bintray.com/konsoletyper/teavm</url>
-    </pluginRepository>
-  </pluginRepositories>
-
   <scm>
-    <url>https://github.com/konsoletyper/teavm</url>
-    <connection>scm:git:git@github.com:konsoletyper/teavm-flavour.git</connection>
+    <url>https://sourceforge.net/projects/flavour/</url>
+    <connection>scm:svn:svn://svn.code.sf.net/p/flavour/trunk</connection>
   </scm>
 
   <distributionManagement>
     <snapshotRepository>
-      <id>sonatype-nexus-snapshots</id>
-      <name>Sonatype Nexus Snapshots</name>
-      <url>${sonatypeOssDistMgmtSnapshotsUrl}</url>
+      <id>ossrh</id>
+      <url>https://s01.oss.sonatype.org/content/repositories/snapshots</url>
     </snapshotRepository>
     <repository>
-      <id>sonatype-nexus-staging</id>
-      <name>Nexus Release Repository</name>
-      <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+      <id>ossrh</id>
+      <url>https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/</url>
     </repository>
   </distributionManagement>
 
@@ -84,7 +67,6 @@
     <antlr.version>4.6</antlr.version>
     <selenium.version>2.51.0</selenium.version>
     <sonatypeOssDistMgmtSnapshotsUrl>https://oss.sonatype.org/content/repositories/snapshots/</sonatypeOssDistMgmtSnapshotsUrl>
-    <wagonApiVersion>1.0-beta-6</wagonApiVersion>
   </properties>
 
   <dependencyManagement>
@@ -206,40 +188,6 @@
   </dependencyManagement>
 
   <build>
-    <!--
-    <extensions>
-      <extension>
-	<groupId>org.apache.maven.wagon</groupId>
-	<artifactId>wagon-file</artifactId>
-	<version>${wagonApiVersion}</version>
-      </extension>
-    </extensions>
-
-    <plugins>
-      <plugin>
-        <groupId>org.codehaus.mojo</groupId>
-        <artifactId>wagon-maven-plugin</artifactId>
-        <version>2.0.2</version>
-        <executions>
-          <execution>
-            <id>upload-lib</id>
-            <phase>deploy</phase>
-            <goals>
-              <goal>upload</goal>
-            </goals>
-            <configuration>
-              <fromDir>${project.build.directory}/</fromDir>
-              <includes>*</includes>
-              <excludes>pom.xml</excludes>
-              <url>file://</url>
-              <toDir>/home/andy/temp/flavour</toDir>
-            </configuration>
-          </execution>
-        </executions>
-      </plugin>
-    </plugins>
-    -->
-    
     <pluginManagement>
       <plugins>
         <plugin>
@@ -355,6 +303,42 @@
         </plugin>
       </plugins>
     </pluginManagement>
+
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-gpg-plugin</artifactId>
+        <version>1.5</version>
+        <configuration>
+          <keyname>${gpg.keyname}</keyname>
+          <passphraseServerId>${gpg.keyname}</passphraseServerId>
+          <gpgArguments>
+            <arg>--pinentry-mode</arg>
+            <arg>loopback</arg>
+          </gpgArguments>
+        </configuration>
+        <executions>
+          <execution>
+            <id>sign-artifacts</id>
+            <phase>verify</phase>
+            <goals>
+              <goal>sign</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+
+      <plugin>
+        <groupId>org.sonatype.central</groupId>
+        <artifactId>central-publishing-maven-plugin</artifactId>
+        <version>0.4.0</version>
+        <extensions>true</extensions>
+        <configuration>
+          <publishingServerId>central</publishingServerId>
+          <tokenAuth>true</tokenAuth>
+        </configuration>
+      </plugin>
+    </plugins>
   </build>
 
   <modules>
@@ -372,63 +356,11 @@
     <profile>
       <id>with-example</id>
       <activation>
-        <activeByDefault>true</activeByDefault>
+        <activeByDefault>false</activeByDefault>
       </activation>
       <modules>
         <module>example</module>
       </modules>
-    </profile>
-
-    <profile>
-      <id>deploy-to-bintray</id>
-      <distributionManagement>
-        <repository>
-          <id>bintray-teavm</id>
-          <name>Bintray Preview Repository</name>
-          <url>https://api.bintray.com/maven/konsoletyper/teavm/teavm-flavour-dev/;publish=1</url>
-        </repository>
-      </distributionManagement>
-    </profile>
-
-    <profile>
-      <id>deploy-to-local</id>
-      <activation>
-        <activeByDefault>true</activeByDefault>
-      </activation>
-      <distributionManagement>
-        <repository>
-          <id>local-teavm</id>
-          <name>Local Preview Repository</name>
-          <url>file:///home/andy/tmp/teavm</url>
-        </repository>
-        <snapshotRepository>
-          <id>local-teavm</id>
-          <name>Local Preview Repository</name>
-          <url>file:///home/andy/tmp/teavm</url>
-        </snapshotRepository>
-      </distributionManagement>
-    </profile>
-
-    <profile>
-      <id>sign-artifacts</id>
-      <build>
-        <plugins>
-          <plugin>
-            <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-gpg-plugin</artifactId>
-            <version>1.4</version>
-            <executions>
-              <execution>
-                <id>sign-artifacts</id>
-                <phase>verify</phase>
-                <goals>
-                  <goal>sign</goal>
-                </goals>
-              </execution>
-            </executions>
-          </plugin>
-        </plugins>
-      </build>
     </profile>
   </profiles>
 </project>

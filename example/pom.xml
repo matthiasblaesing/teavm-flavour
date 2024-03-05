@@ -17,7 +17,7 @@
     xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <parent>
-    <groupId>org.teavm.flavour</groupId>
+    <groupId>com.frequal.flavour</groupId>
     <artifactId>teavm-flavour</artifactId>
     <version>0.3.0-SNAPSHOT</version>
   </parent>
@@ -47,27 +47,27 @@
       <artifactId>teavm-jso-apis</artifactId>
     </dependency>
     <dependency>
-      <groupId>org.teavm.flavour</groupId>
+      <groupId>com.frequal.flavour</groupId>
       <artifactId>teavm-flavour-templates</artifactId>
       <version>${project.version}</version>
     </dependency>
     <dependency>
-      <groupId>org.teavm.flavour</groupId>
+      <groupId>com.frequal.flavour</groupId>
       <artifactId>teavm-flavour-widgets</artifactId>
       <version>${project.version}</version>
     </dependency>
     <dependency>
-      <groupId>org.teavm.flavour</groupId>
+      <groupId>com.frequal.flavour</groupId>
       <artifactId>teavm-flavour-routing</artifactId>
       <version>${project.version}</version>
     </dependency>
     <dependency>
-      <groupId>org.teavm.flavour</groupId>
+      <groupId>com.frequal.flavour</groupId>
       <artifactId>teavm-flavour-json</artifactId>
       <version>${project.version}</version>
     </dependency>
     <dependency>
-      <groupId>org.teavm.flavour</groupId>
+      <groupId>com.frequal.flavour</groupId>
       <artifactId>teavm-flavour-rest</artifactId>
       <version>${project.version}</version>
     </dependency>

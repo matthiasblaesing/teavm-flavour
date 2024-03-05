@@ -22,7 +22,7 @@ import org.teavm.flavour.expr.Location;
 
 public class DOMElement extends TemplateNode {
     private String name;
-    private boolean useSvgNamespace = false;
+    private boolean useSvgNamespace;
     private List<TemplateNode> childNodes = new ArrayList<>();
     private List<DOMAttribute> attributes = new ArrayList<>();
     private List<DOMAttribute> readonlyAttributes = Collections.unmodifiableList(attributes);
