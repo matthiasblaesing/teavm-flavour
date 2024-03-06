@@ -36,10 +36,10 @@ mvn archetype:generate \
   -DgroupId=com.example \
   -DartifactId=flavour \
   -DinteractiveMode=false \
-  -DarchetypeGroupId=org.teavm.flavour \
+  -DarchetypeGroupId=com.frequal.flavour \
   -DarchetypeArtifactId=teavm-flavour-application \
-  -DarchetypeVersion=0.2.1
-cd flavour && mvn clean install && open target/flavour-1.0-SNAPSHOT/index.html
+  -DarchetypeVersion=0.3.0
+cd flavour && mvn clean install && firefox target/flavour-1.0-SNAPSHOT/index.html
 </pre>
 </div>
   </div>
