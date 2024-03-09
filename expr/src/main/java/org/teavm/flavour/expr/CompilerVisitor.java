@@ -853,7 +853,7 @@ class CompilerVisitor implements ExprVisitor<TypedPlan> {
                     instance != null ? instance.getPlan() : null, valuePlan.getPlan()), voidType(), expr);
         }
 
-        error(expr, "Property not found: " + name);
+        error(expr, "No setter (or public field) found for: " + name);
         return planWithLocation(new ThisPlan(), voidType(), expr);
     }
 

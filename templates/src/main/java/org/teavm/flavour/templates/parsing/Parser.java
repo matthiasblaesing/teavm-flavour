@@ -731,6 +731,9 @@ public class Parser {
                     setter = componentMeta.altSetter;
                     GenericClass type = componentMeta.altSam.getActualOwner().substitute(inference.getSubstitutions());
                     plan = compileExpr(attr.getValueSegment(), expr, type);
+                    if (plan == null) {
+                        break;
+                    }
                     ComponentFunctionBinding computationBinding = new ComponentFunctionBinding(
                             setter.getOwner().getName(), setter.getName(), (LambdaPlan) plan.getPlan(),
                             componentMeta.altSam.getActualOwner().getName());
