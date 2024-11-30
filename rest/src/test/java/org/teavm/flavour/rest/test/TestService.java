@@ -15,20 +15,42 @@
  */
 package org.teavm.flavour.rest.test;
 
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
-import javax.ws.rs.QueryParam;
+import jakarta.ws.rs.GET;
+import jakarta.ws.rs.Path;
+import jakarta.ws.rs.PathParam;
+import jakarta.ws.rs.QueryParam;
 import org.teavm.flavour.rest.Resource;
 
+// The usage of both jakarta.ws.rs and javax.ws.rs is required until the teavm
+// core browser runner switches to an implementation based on the jakarta
+// namespace.
 @Resource
 @Path("test")
+@javax.ws.rs.Path("test")
 public interface TestService {
-    @GET
-    @Path("integers/sum")
-    int sum(@QueryParam("a") int a, @QueryParam("b") int b);
 
     @GET
+    @javax.ws.rs.GET
+    @Path("integers/sum")
+    @javax.ws.rs.Path("integers/sum")
+    int sum(
+            @QueryParam("a") @javax.ws.rs.QueryParam("a") int a,
+            @QueryParam("b") @javax.ws.rs.QueryParam("b") int b
+    );
+
+    @GET
+    @javax.ws.rs.GET
     @Path("integers/mod-{mod}/sum")
-    int sum(@PathParam("mod") int mod, @QueryParam("a") int a, @QueryParam("b") int b);
+    @javax.ws.rs.Path("integers/mod-{mod}/sum")
+    int sum(
+            @PathParam("mod") @javax.ws.rs.PathParam("mod") int mod,
+            @QueryParam("a") @javax.ws.rs.QueryParam("a") int a,
+            @QueryParam("b") @javax.ws.rs.QueryParam("b") int b
+    );
+
+    @GET
+    @javax.ws.rs.GET
+    @Path("complex/demo")
+    @javax.ws.rs.Path("complex/demo")
+    ComplexDemo getComplexDemo();
 }

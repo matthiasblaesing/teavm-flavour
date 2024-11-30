@@ -16,6 +16,7 @@
 package org.teavm.flavour.json.tree;
 
 import org.teavm.jso.JSBody;
+import org.teavm.jso.JSClass;
 import org.teavm.jso.JSIndexer;
 import org.teavm.jso.JSMethod;
 import org.teavm.jso.JSProperty;
@@ -24,6 +25,7 @@ import org.teavm.jso.JSProperty;
  *
  * @author Alexey Andreev
  */
+@JSClass(transparent = true)
 public abstract class ArrayNode extends Node {
     @JSProperty
     abstract int getLength();

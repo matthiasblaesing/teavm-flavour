@@ -16,11 +16,13 @@
 package org.teavm.flavour.json.tree;
 
 import org.teavm.jso.JSBody;
+import org.teavm.jso.JSClass;
 
 /**
  *
  * @author Alexey Andreev
  */
+@JSClass(transparent = true)
 public abstract class BooleanNode extends Node {
     public static final BooleanNode TRUE = get(true);
     public static final BooleanNode FALSE = get(false);

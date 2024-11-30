@@ -27,4 +27,17 @@ public class TestServiceImpl implements TestService {
         return (a + b) % mod;
     }
 
+    @Override
+    public ComplexDemo getComplexDemo() {
+        ComplexDemo demo = new ComplexDemo();
+        ComplexDemo nestedDemo = new ComplexDemo();
+        demo.setDoubleDemo(42.23);
+        demo.setStringDemo("Hello");
+        demo.setStatus(ComplexDemo.Status.ORDERED);
+        nestedDemo.setDoubleDemo(3.14);
+        nestedDemo.setStringDemo("World");
+        nestedDemo.setStatus(ComplexDemo.Status.DELIVERED);
+        demo.setNestedSemiComplexDemo(nestedDemo);
+        return demo;
+    }
 }

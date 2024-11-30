@@ -40,6 +40,18 @@ public class OrderDTO {
 
     public List<OrderItemDTO> items = new ArrayList<>();
 
+    public void setStatusString(String status) {
+        if (status == null) {
+            this.status = null;
+        } else {
+            this.status = OrderStatus.valueOf(status);
+        }
+    }
+
+    public String getStatusString() {
+        return status == null ? null : status.name();
+    }
+
     @JsonIgnore
     public BigDecimal getTotal() {
         BigDecimal total = BigDecimal.ZERO;

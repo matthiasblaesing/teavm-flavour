@@ -16,25 +16,20 @@
 package org.teavm.flavour.json.tree;
 
 import org.teavm.jso.JSBody;
+import org.teavm.jso.JSClass;
 
 /**
  *
  * @author Alexey Andreev
  */
+@JSClass(transparent = true)
 public abstract class NumberNode extends Node {
-    @JSBody(params = { "node" }, script = "return node;")
-    static native double getValue(NumberNode node);
 
-    @JSBody(params = { "node" }, script = "return node|0;")
-    static native int getIntValue(NumberNode node);
+    @JSBody(params = { }, script = "return this;")
+    public native final double getValue();
 
-    public final double getValue() {
-        return getValue(this);
-    }
-
-    public final int getIntValue() {
-        return getIntValue(this);
-    }
+    @JSBody(params = { }, script = "return this|0;")
+    public native final int getIntValue();
 
     public final boolean isInt() {
         return getValue() == getIntValue();

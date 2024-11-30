@@ -16,11 +16,13 @@
 package org.teavm.flavour.json.tree;
 
 import org.teavm.jso.JSBody;
+import org.teavm.jso.JSClass;
 
 /**
  *
  * @author Alexey Andreev
  */
+@JSClass(transparent = true)
 public abstract class StringNode extends Node {
     @JSBody(params = {}, script = "return this;")
     public native final String getValue();

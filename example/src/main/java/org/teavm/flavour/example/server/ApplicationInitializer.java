@@ -35,6 +35,6 @@ public class ApplicationInitializer implements WebApplicationInitializer {
         JerseyInitializer.servletContext = servletContext;
         ServletRegistration.Dynamic reg = servletContext.addServlet("jersey", ServletContainer.class);
         reg.addMapping("/api/*");
-        reg.setInitParameter("javax.ws.rs.Application", JerseyInitializer.class.getName());
+        reg.setInitParameter("jakarta.ws.rs.Application", JerseyInitializer.class.getName());
     }
 }

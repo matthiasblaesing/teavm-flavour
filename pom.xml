@@ -79,7 +79,7 @@
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <slf4j.version>1.7.7</slf4j.version>
-    <teavm.version>0.7.0-dev-1212</teavm.version>
+    <teavm.version>0.11.0</teavm.version>
     <jackson.version>2.5.4</jackson.version>
     <antlr.version>4.6</antlr.version>
     <selenium.version>2.51.0</selenium.version>
@@ -261,7 +261,8 @@
             <argLine>-Xmx512m</argLine>
             <systemProperties>
               <teavm.junit.target>${project.build.directory}/js-tests</teavm.junit.target>
-              <teavm.junit.js.runner>htmlunit</teavm.junit.js.runner>
+              <teavm.junit.js.runner>browser-chrome</teavm.junit.js.runner>
+              <!--<teavm.junit.js.runner>browser</teavm.junit.js.runner>-->
               <teavm.junit.minified>true</teavm.junit.minified>
               <teavm.junit.optimized>true</teavm.junit.optimized>
             </systemProperties>
@@ -274,7 +275,8 @@
           <configuration>
             <systemProperties>
               <teavm.junit.target>${project.build.directory}/js-tests</teavm.junit.target>
-              <teavm.junit.js.runner>htmlunit</teavm.junit.js.runner>
+              <teavm.junit.js.runner>browser-chrome</teavm.junit.js.runner>
+              <!--<teavm.junit.js.runner>browser</teavm.junit.js.runner>-->
               <teavm.junit.minified>true</teavm.junit.minified>
               <teavm.junit.optimized>true</teavm.junit.optimized>
             </systemProperties>

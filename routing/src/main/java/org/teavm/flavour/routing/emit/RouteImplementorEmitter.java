@@ -200,7 +200,10 @@ class RouteImplementorEmitter {
             case DOUBLE:
                 return emit(() -> Double.parseDouble(decodedString.get()));
             case DATE:
-                return emit(() -> new Date(RoutingImpl.parseDate(decodedString.get())));
+                return emit(() -> {
+                    Long value = RoutingImpl.parseDate(decodedString.get());
+                    return value != null ? new Date(value) : null;
+                });
             case ENUM: {
                 ReflectMethod method = param.getValueType().getDeclaredJMethod("valueOf", String.class);
                 return emit(() -> method.invoke(null, decodedString.get()));

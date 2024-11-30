@@ -16,7 +16,7 @@
 package org.teavm.flavour.rest.impl.model;
 
 final class JAXRSAnnotations {
-    private static final String PREFIX = "javax.ws.rs.";
+    private static final String PREFIX = "jakarta.ws.rs.";
     public static final String PATH = PREFIX + "Path";
     public static final String GET = PREFIX + "GET";
     public static final String PUT = PREFIX + "PUT";

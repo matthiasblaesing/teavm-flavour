@@ -31,9 +31,7 @@
 
   <properties>
     <jersey.version>2.22.1</jersey.version>
-    <jetty.version>9.3.5.v20151012</jetty.version>
-    <teavm.flavour.rest.test.url>http://localhost:8080/</teavm.flavour.rest.test.url>
-    <teavm.flavour.rest.test.port>8080</teavm.flavour.rest.test.port>
+    <jetty.version>9.4.56.v20240826</jetty.version>
   </properties>
 
   <dependencies>
@@ -155,6 +153,12 @@
       <artifactId>selenium-htmlunit-driver</artifactId>
       <scope>test</scope>
     </dependency>
+    <dependency>
+      <groupId>com.sun.xml.bind</groupId>
+      <artifactId>jaxb-impl</artifactId>
+      <version>2.3.9</version>
+      <scope>test</scope>
+    </dependency>
   </dependencies>
 
   <build>
@@ -195,6 +199,9 @@
           <stopKey>alpha</stopKey>
           <stopPort>9099</stopPort>
           <useTestScope>true</useTestScope>
+            <supportedPackagings>
+              <supportedPackaging>jar</supportedPackaging>
+            </supportedPackagings>
         </configuration>
         <executions>
           <execution>
@@ -225,11 +232,6 @@
               <goal>integration-test</goal>
               <goal>verify</goal>
             </goals>
-            <configuration>
-              <systemProperties>
-                <rest.service.url>http://localhost:8080/</rest.service.url>
-              </systemProperties>
-            </configuration>
           </execution>
         </executions>
       </plugin>
