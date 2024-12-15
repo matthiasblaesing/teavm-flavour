@@ -1,0 +1,45 @@
+<html>
+<head>
+<title>Flavour Contributor Guidelines</title>
+<link rel="shortcut icon" href="../favicon.ico" type="image/x-icon" >
+<link rel="stylesheet" type="text/css" href="css/app.css">
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Flavour Contributor Guidelines">
+</head>
+<body bgcolor="#ffffff">
+<h1 align=center>Flavour Contributor Guidelines</h1>
+
+<div class="panel-container">
+
+<div class="panel">
+  <h1>Getting Started</h1>
+<ul>
+  <li> <a href="https://sourceforge.net/p/flavour/trunk/HEAD/tree/">Download the sources</a>
+  <li> Set up your development environment
+      <ul>
+	<li> OpenJDK 8
+	<li> Apache Maven
+	<li> mvnd (optional but highly recommended)
+	<li> NetBeans IDE (or another IDE of your choice)
+      </ul>
+  <li> Build the project
+      <ul>
+	<li> <pre>mvnd clean install</pre>
+      </ul>
+</ul>
+</div>
+
+<div class="panel">
+  <h1>Coding Guidelines</h1>
+<ul>
+  <li> Follow the existing style
+  <li> Test your change.  This will often involve making an app that exercises your framework change.
+  <li> Ensure <code>mvn clean install</code> passes before submitting a patch
+  <li> Have fun!
+</ul>
+</div>
+
+</div>
+</body>
+</html>

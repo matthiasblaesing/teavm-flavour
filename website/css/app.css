@@ -1,0 +1,100 @@
+:root {
+  --background: #336b87;
+  --text: #2a3132;
+  --div: #90afc5;
+  --link: black;
+  --visited: var(--text);
+}
+
+body {
+  background: var(--background);
+  color: var(--text);
+  font-size: 1.0em;
+  margin: 0;
+}
+
+a:link {
+  color: var(--link);
+}
+
+a:visited {
+  color: var(--visited);
+}
+
+input {
+  font-size: 1.2em;
+}
+
+button {
+  font-size: 1.4em;
+  margin-top: 0.5em;
+}
+
+button.close {
+  margin-top: 0em;
+  margin-bottom: 0.5em;
+}
+
+button.small {
+  font-size: 0.7em;
+}
+
+h1 {
+  margin: 0;
+}
+
+h2 {
+  text-align: center;
+}
+
+h3 {
+  text-align: center;
+}
+
+.panel-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: stretch;
+  //max-width: 65em;
+  margin: auto;
+}
+
+.panel {
+  border: 0px solid;
+  border-radius: 1.0em;
+  background: var(--div);
+  width: 21em;
+  min-width: 15em;
+  margin: 0.5em;
+  padding: 1.0em;
+  text-align: center;
+}
+
+.selected {
+  border: 5px solid green;
+  border-radius: 1.0em;
+  margin: 0.2em;
+}
+
+.unselected {
+  border: 1px solid var(--div);
+  border-radius: 1.0em;
+  margin: 0.4em;
+}
+
+audio {
+  width: 90%;
+}
+
+.no-top-margin {
+  margin-top: 0em;
+}
+
+.small-bottom-margin {
+  margin-bottom: 0.3em;
+}
+
+ul {
+    text-align: left;
+}
