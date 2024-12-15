@@ -125,6 +125,24 @@ public class DeserializerTest {
 
     @Test
     public void readsBuiltInTypes() {
+        assertTrue(JSONRunner.deserialize("true", Boolean.class));
+        assertTrue(JSONRunner.deserialize("true", boolean.class));
+        assertEquals(1, (byte) JSONRunner.deserialize("1", Byte.class));
+        assertEquals(1, (byte) JSONRunner.deserialize("1", byte.class));
+        assertEquals(2, (short) JSONRunner.deserialize("2", Short.class));
+        assertEquals(2, (short) JSONRunner.deserialize("2", short.class));
+        assertEquals(3, (int) JSONRunner.deserialize("3", Integer.class));
+        assertEquals(3, (int) JSONRunner.deserialize("3", int.class));
+        assertEquals(4, (long) JSONRunner.deserialize("4", Long.class));
+        assertEquals(4, (long) JSONRunner.deserialize("4", long.class));
+        assertEquals(5.1f, (float) JSONRunner.deserialize("5.1", Float.class), 0.01);
+        assertEquals(5.1f, (float) JSONRunner.deserialize("5.1", float.class), 0.01);
+        assertEquals(6.1, (double) JSONRunner.deserialize("6.1", Double.class), 0.01);
+        assertEquals(6.1, (double) JSONRunner.deserialize("6.1", double.class), 0.01);
+        assertEquals('A', (char) JSONRunner.deserialize("\"A\"", Character.class));
+        assertEquals('A', (char) JSONRunner.deserialize("\"A\"", char.class));
+        assertEquals("Hallo", JSONRunner.deserialize("\"Hallo\"", String.class));
+
         BuiltInTypes obj = JSONRunner.deserialize("{ " +
                 "\"boolField\" : true," +
                 "\"byteField\" : 1," +

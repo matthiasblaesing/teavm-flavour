@@ -81,11 +81,11 @@ import org.teavm.metaprogramming.reflect.ReflectField;
 import org.teavm.metaprogramming.reflect.ReflectMethod;
 
 public class JsonDeserializerEmitter {
-    private Diagnostics diagnostics = getDiagnostics();
-    private ClassLoader classLoader = getClassLoader();
-    private ClassInformationProvider informationProvider = ClassInformationProvider.getInstance();
-    private GenericTypeProvider genericTypeProvider = new GenericTypeProvider(classLoader);
-    private static Map<String, Class<?>> predefinedDeserializers = new HashMap<>();
+    private final Diagnostics diagnostics = getDiagnostics();
+    private final ClassLoader classLoader = getClassLoader();
+    private final ClassInformationProvider informationProvider = ClassInformationProvider.getInstance();
+    private final GenericTypeProvider genericTypeProvider = new GenericTypeProvider(classLoader);
+    private final static Map<String, Class<?>> predefinedDeserializers = new HashMap<>();
 
     static {
         predefinedDeserializers.put(Object.class.getName(), BooleanDeserializer.class);
@@ -123,7 +123,7 @@ public class JsonDeserializerEmitter {
 
         Class<?> serializerClass = predefinedDeserializers.get(cls.getName());
         if (serializerClass != null) {
-            ReflectMethod ctor = Metaprogramming.findClass(serializerClass.getName()).getMethod("<init>");
+            ReflectMethod ctor = Metaprogramming.findClass(serializerClass).getMethod("<init>");
             return emit(() -> (JsonDeserializer) ctor.construct());
         }
 
@@ -158,11 +158,12 @@ public class JsonDeserializerEmitter {
                     return emit(() -> new DoubleArrayDeserializer());
             }
         }
-        Value<? extends JsonDeserializer> itemDeserializer = getClassDeserializer(cls.getComponentType());
+        ReflectClass<?> componentClass = cls.getComponentType();
+        Value<? extends JsonDeserializer> itemDeserializer = getClassDeserializer(componentClass);
         if (itemDeserializer == null) {
             return null;
         }
-        return emit(() -> new ArrayDeserializer(cls.asJavaClass(), itemDeserializer.get()));
+        return emit(() -> new ArrayDeserializer(componentClass.asJavaClass(), itemDeserializer.get()));
     }
 
     private Value<? extends JsonDeserializer> emitEnumDeserializer(ReflectClass<?> cls) {
@@ -232,7 +233,6 @@ public class JsonDeserializerEmitter {
 
     private Value<Object> emitIdCheck(ClassInformation information, Value<Node> node,
             Value<JsonDeserializerContext> context) {
-        String className = information.className;
         switch (information.idGenerator) {
             case INTEGER:
                 return emitIntegerIdCheck(information, node, context);
@@ -240,8 +240,7 @@ public class JsonDeserializerEmitter {
                 return emitPropertyIdCheck(information, node, context);
             case NONE:
                 return lazy(() -> {
-                    throw new IllegalArgumentException("Can't deserialize node " + node.get().stringify()
-                            + " to an instance of " + className);
+                    return null;
                 });
             default:
                 throw new AssertionError("Unsupported id kind: " + information.idGenerator);
@@ -625,7 +624,7 @@ public class JsonDeserializerEmitter {
     private Value<JsonDeserializer> createArrayDeserializer(GenericArrayType type,
             ReflectAnnotatedElement annotations) {
         Value<JsonDeserializer> itemDeserializer = createDeserializer(type.getGenericComponentType(), annotations);
-        Class<?> cls = GenericTypeProvider.rawType(type);
+        Class<?> cls = GenericTypeProvider.rawType(type.getGenericComponentType());
         return emit(() -> new ArrayDeserializer(cls, itemDeserializer.get()));
     }
 
@@ -655,7 +654,7 @@ public class JsonDeserializerEmitter {
         if (itemDeserializer == null) {
             return null;
         }
-        return emit(() -> new ArrayDeserializer(type, itemDeserializer.get()));
+        return emit(() -> new ArrayDeserializer(type.getComponentType(), itemDeserializer.get()));
     }
 
     private Value<JsonDeserializer> createObjectDeserializer(Class<?> type) {

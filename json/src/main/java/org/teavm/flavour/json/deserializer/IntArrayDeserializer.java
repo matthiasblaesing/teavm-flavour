@@ -30,9 +30,9 @@ public class IntArrayDeserializer extends JsonDeserializer {
         }
 
         ArrayNode arrayNode = (ArrayNode) node;
-        long[] array = new long[arrayNode.size()];
+        int[] array = new int[arrayNode.size()];
         for (int i = 0; i < array.length; ++i) {
-            array[i] = JSON.deserializeLong(arrayNode.get(i));
+            array[i] = JSON.deserializeInt(arrayNode.get(i));
         }
 
         return array;

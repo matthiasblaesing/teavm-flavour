@@ -16,12 +16,14 @@
 package org.teavm.flavour.json.tree;
 
 import org.teavm.jso.JSBody;
+import org.teavm.jso.JSClass;
 import org.teavm.jso.JSObject;
 
 /**
  *
  * @author Alexey Andreev
  */
+@JSClass(transparent = true)
 public abstract class Node implements JSObject {
     @JSBody(params = { "node" }, script = "return typeof node == 'object' && node instanceof Array;")
     static native boolean isArray(Node node);
@@ -43,6 +45,46 @@ public abstract class Node implements JSObject {
 
     @JSBody(params = { "node" }, script = "return typeof node == 'boolean';")
     static native boolean isBoolean(Node node);
+
+    public ArrayNode asArrayNode() {
+        if (isArray()) {
+            return cast();
+        } else {
+            throw new IllegalStateException("Not an ArrayNode!");
+        }
+    }
+
+    public ObjectNode asObjectNode() {
+        if (isObject()) {
+            return cast();
+        } else {
+            throw new IllegalStateException("Not an ObjectNode!");
+        }
+    }
+
+    public NumberNode asNumberNode() {
+        if (isNumber()) {
+            return cast();
+        } else {
+            throw new IllegalStateException("Not a NumberNode!");
+        }
+    }
+
+    public NullNode asNullNode() {
+        if (isNull()) {
+            return cast();
+        } else {
+            throw new IllegalStateException("Not a NullNode!");
+        }
+    }
+
+    public StringNode asStringNode() {
+        if (isString()) {
+            return cast();
+        } else {
+            throw new IllegalStateException("Not a StringNode!");
+        }
+    }
 
     public final boolean isArray() {
         return isArray(this);

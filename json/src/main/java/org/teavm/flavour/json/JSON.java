@@ -66,6 +66,23 @@ public final class JSON {
 
     @SuppressWarnings("unchecked")
     public static <T> T deserialize(Node node, Class<T> type) {
+        if (type == double.class) {
+            type = (Class<T>) (Class<?>) Double.class;
+        } else if (type == float.class) {
+            type = (Class<T>) (Class<?>) Float.class;
+        } else if (type == long.class) {
+            type = (Class<T>) (Class<?>) Long.class;
+        } else if (type == int.class) {
+            type = (Class<T>) (Class<?>) Integer.class;
+        } else if (type == short.class) {
+            type = (Class<T>) (Class<?>) Short.class;
+        } else if (type == byte.class) {
+            type = (Class<T>) (Class<?>) Byte.class;
+        } else if (type == char.class) {
+            type = (Class<T>) (Class<?>) Character.class;
+        } else if (type == boolean.class) {
+            type = (Class<T>) (Class<?>) Boolean.class;
+        }
         String typeName = type.getName();
         JsonDeserializer deserializer = getClassDeserializer(type);
         if (deserializer == null) {

@@ -21,6 +21,7 @@ import org.teavm.flavour.routing.Route;
 import org.teavm.jso.JSBody;
 import org.teavm.jso.core.JSArray;
 import org.teavm.jso.core.JSDate;
+import org.teavm.jso.core.JSObjects;
 import org.teavm.jso.core.JSRegExp;
 import org.teavm.jso.core.JSString;
 import org.teavm.metaprogramming.CompileTime;
@@ -59,12 +60,19 @@ public final class RoutingImpl {
         }
     }
 
-    public static long parseDate(String text) {
+    public static Long parseDate(String text) {
         JSRegExp regex = JSRegExp.create("(\\d{4})-(\\d{2})-(\\d{2})(T(\\d{2}):(\\d{2}):(\\d{2}))?");
         JSArray<JSString> groups = regex.exec(JSString.valueOf(text));
-        JSDate date = JSDate.create(parseInt(groups.get(1)), parseInt(groups.get(2)) - 1, parseInt(groups.get(3)),
+        JSDate date;
+        if (!JSObjects.isUndefined(groups.get(4))) {
+            date = JSDate.create(parseInt(groups.get(1)), parseInt(groups.get(2)) - 1, parseInt(groups.get(3)),
                 parseInt(groups.get(5)), parseInt(groups.get(6)), parseInt(groups.get(7)));
-        return (long) date.getTime();
+        } else if (!JSObjects.isUndefined(groups.get(0))) {
+            date = JSDate.create(parseInt(groups.get(1)), parseInt(groups.get(2)) - 1, parseInt(groups.get(3)));
+        } else {
+            date = null;
+    }
+        return date != null ? (long) date.getTime() : null;
     }
 
     public static String dateToString(long millis) {

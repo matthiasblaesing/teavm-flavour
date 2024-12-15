@@ -19,7 +19,6 @@ import static org.junit.Assert.*;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.teavm.flavour.rest.RESTClient;
-import org.teavm.jso.JSBody;
 import org.teavm.junit.SkipJVM;
 import org.teavm.junit.TeaVMTestRunner;
 
@@ -27,7 +26,7 @@ import org.teavm.junit.TeaVMTestRunner;
 @SkipJVM
 public class RestIT {
 
-    private TestService service = RESTClient.factory(TestService.class).createResource(getUrl());
+    private TestService service = RESTClient.factory(TestService.class).createResource("http://localhost:8080");
 
     @Test
     public void passesQueryParams() throws Exception {
@@ -39,7 +38,14 @@ public class RestIT {
         assertEquals(0, service.sum(10, 7, 3));
     }
 
-    @JSBody(script = "return $test_url;")
-    private static native String getUrl();
+    @Test
+    public void canReceiveComplexObject() throws Exception {
+        ComplexDemo cd = service.getComplexDemo();
+        assertEquals("Hello", cd.getStringDemo());
+        assertEquals(42.23, cd.getDoubleDemo(), 0.01);
+        assertNotNull(cd.getNestedSemiComplexDemo());
+        assertEquals("World", cd.getNestedSemiComplexDemo().getStringDemo());
+        assertEquals(3.14, cd.getNestedSemiComplexDemo().getDoubleDemo(), 0.01);
+    }
 
 }

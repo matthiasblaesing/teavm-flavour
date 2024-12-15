@@ -36,29 +36,28 @@
     border-style: none;
     outline-style: none;
     cursor: pointer;
+    padding: 0;
 }
 .flavour-calendar-previous-month > span, .flavour-calendar-next-month > span {
     position: absolute;
     display: block;
-    width: 7px;
-    height: 13px;
-    top: 3px;
-    left: 6px;
-    background-image: url(arrows.png);
+    width: 16px;
+    height: 16px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
     background-repeat: no-repeat;
+    background-size: contain;
 }
+
 .flavour-calendar-previous-month > span {
-    background-position: 0px -13px;
+    background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZlcnNpb249IjEuMSIgd2lkdGg9IjE2IiBoZWlnaHQ9IjE2Ij4KPHBhdGggZD0iTSAxNi4wMzI5NTYsLTAuMDE3NzA0NzMgMC4wMzg3MTU4NCw3Ljk3NjUzNTkgMTYuMDMyOTU2LDE1Ljk3MDc3NiBaIiBmaWxsPSJibGFjayIvPgo8L3N2Zz4=);
 }
-.flavour-calendar-previous-month:hover > span {
-    background-position: -7px -13px;
-}
+
 .flavour-calendar-next-month > span {
-    background-position: 0px 0px;
+    background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZlcnNpb249IjEuMSIgd2lkdGg9IjE2IiBoZWlnaHQ9IjE2Ij4KPHBhdGggZD0iTSAwLjAzODcxNTg0LC0wLjAxNzcwNDczIDE2LjAzMjk1Niw3Ljk3NjUzNTkgMC4wMzg3MTU4NCwxNS45NzA3NzYgWiIgZmlsbD0iYmxhY2siLz4KPC9zdmc+);
 }
-.flavour-calendar-next-month:hover > span {
-    background-position: -7px 0px;
-}
+
 .flavour-calendar-sheet {
     position: absolute;
     left: 4px;

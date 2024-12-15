@@ -16,11 +16,13 @@
 package org.teavm.flavour.json.tree;
 
 import org.teavm.jso.JSBody;
+import org.teavm.jso.JSClass;
 
 /**
  *
  * @author Alexey Andreev
  */
+@JSClass(transparent = true)
 public abstract class NullNode extends Node {
     @JSBody(params = {}, script = "return null;")
     public static native NullNode instance();
