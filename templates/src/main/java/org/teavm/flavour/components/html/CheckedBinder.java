@@ -39,10 +39,14 @@ public class CheckedBinder implements Renderable {
 
     @Override
     public void render() {
-        boolean newValue = value.get();
-        if (newValue != cachedValue) {
-            cachedValue = newValue;
-            element.setChecked(newValue);
+        try {
+            boolean newValue = value.get();
+            if (newValue != cachedValue) {
+                cachedValue = newValue;
+                element.setChecked(newValue);
+            }
+        } catch (Exception xpt) {
+            System.out.println("CheckedBinder: Exception in render(): " + xpt.getMessage());
         }
     }
 

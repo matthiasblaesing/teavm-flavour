@@ -49,15 +49,19 @@ public class BidirectionalCheckedBinder implements Renderable {
 
     @Override
     public void render() {
-        boolean newValue = value.get();
-        if (newValue != cachedValue) {
-            cachedValue = newValue;
-            element.setChecked(newValue);
-        }
+        try {
+            boolean newValue = value.get();
+            if (newValue != cachedValue) {
+                cachedValue = newValue;
+                element.setChecked(newValue);
+            }
 
-        if (!bound) {
-            bound = true;
-            element.addEventListener("change", nativeListener);
+            if (!bound) {
+                bound = true;
+                element.addEventListener("change", nativeListener);
+            }
+        } catch (Exception xpt) {
+            System.out.println("BidirectionalCheckedBinder: Exception in render(): " + xpt.getMessage());
         }
     }
 

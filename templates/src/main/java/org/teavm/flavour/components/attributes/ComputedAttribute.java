@@ -47,10 +47,14 @@ public class ComputedAttribute implements Renderable {
 
     @Override
     public void render() {
-        Object newValue = value.get();
-        if (!Objects.equals(newValue, cachedValue)) {
-            cachedValue = newValue;
-            element.setAttribute(name, String.valueOf(newValue));
+        try {
+            Object newValue = value.get();
+            if (!Objects.equals(newValue, cachedValue)) {
+                cachedValue = newValue;
+                element.setAttribute(name, String.valueOf(newValue));
+            }
+        } catch (Exception xpt) {
+            System.out.println("ComputedAttribute: Exception in render(): " + xpt.getMessage());
         }
     }
 

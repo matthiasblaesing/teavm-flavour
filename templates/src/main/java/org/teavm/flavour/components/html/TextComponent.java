@@ -44,17 +44,21 @@ public class TextComponent<T> extends AbstractComponent {
 
     @Override
     public void render() {
-        T computedValue = value.get();
-        if (cacheInitialized && Objects.equals(cachedValue, computedValue)) {
-            return;
+        try {
+            T computedValue = value.get();
+            if (cacheInitialized && Objects.equals(cachedValue, computedValue)) {
+                return;
+            }
+            cacheInitialized = true;
+            cachedValue = computedValue;
+            if (textSlot != null) {
+                textSlot.delete();
+                textSlot = null;
+            }
+            textSlot = new NodeHolder(Window.current().getDocument().createTextNode(String.valueOf(computedValue)));
+            getSlot().append(textSlot);
+        } catch (Exception xpt) {
+            System.out.println("TextComponent: Exception in render(): " + xpt.getMessage());
         }
-        cacheInitialized = true;
-        cachedValue = computedValue;
-        if (textSlot != null) {
-            textSlot.delete();
-            textSlot = null;
-        }
-        textSlot = new NodeHolder(Window.current().getDocument().createTextNode(String.valueOf(computedValue)));
-        getSlot().append(textSlot);
     }
 }

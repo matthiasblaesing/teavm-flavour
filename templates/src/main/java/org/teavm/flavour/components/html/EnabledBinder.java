@@ -39,10 +39,14 @@ public class EnabledBinder implements Renderable {
 
     @Override
     public void render() {
-        boolean newValue = value.get();
-        if (newValue != cachedValue) {
-            cachedValue = newValue;
-            element.setDisabled(!newValue);
+        try {
+            boolean newValue = value.get();
+            if (newValue != cachedValue) {
+                cachedValue = newValue;
+                element.setDisabled(!newValue);
+            }
+        } catch (Exception xpt) {
+            System.out.println("EnabledBinder: Exception in render(): " + xpt.getMessage());
         }
     }
 

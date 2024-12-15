@@ -50,15 +50,19 @@ public class BidirectionalValueBinder<T> implements Renderable {
 
     @Override
     public void render() {
-        Object newValue = value.get();
-        if (!Objects.equals(newValue, cachedValue)) {
-            cachedValue = newValue;
-            element.setValue(String.valueOf(newValue));
-        }
+        try {
+            Object newValue = value.get();
+            if (!Objects.equals(newValue, cachedValue)) {
+                cachedValue = newValue;
+                element.setValue(String.valueOf(newValue));
+            }
 
-        if (!bound) {
-            bound = true;
-            target.addValueChangeListener(listener);
+            if (!bound) {
+                bound = true;
+                target.addValueChangeListener(listener);
+            }
+        } catch (Exception xpt) {
+            System.out.println("BidirectionalValueBinder: Exception in render(): " + xpt.getMessage());
         }
     }
 

@@ -40,10 +40,14 @@ public class ValueBinder<T> implements Renderable {
 
     @Override
     public void render() {
-        Object newValue = value.get();
-        if (!Objects.equals(newValue, cachedValue)) {
-            cachedValue = newValue;
-            element.setValue(String.valueOf(newValue));
+        try {
+            Object newValue = value.get();
+            if (!Objects.equals(newValue, cachedValue)) {
+                cachedValue = newValue;
+                element.setValue(String.valueOf(newValue));
+            }
+        } catch (Exception xpt) {
+            System.out.println("ValueBinder: Exception in render(): " + xpt.getMessage());
         }
     }
 
