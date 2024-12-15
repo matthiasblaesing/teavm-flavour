@@ -31,12 +31,12 @@
     </dependency>
 
     <dependency>
-      <groupId>org.teavm.flavour</groupId>
+      <groupId>com.frequal.flavour</groupId>
       <artifactId>teavm-flavour-widgets</artifactId>
       <version>\${flavour.version}</version>
     </dependency>
     <dependency>
-      <groupId>org.teavm.flavour</groupId>
+      <groupId>com.frequal.flavour</groupId>
       <artifactId>teavm-flavour-rest</artifactId>
       <version>\${flavour.version}</version>
     </dependency>
